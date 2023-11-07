@@ -1,0 +1,23 @@
+{% load static %}
+
+<!-- Header Section Begin -->
+<nav class="main-nav">
+    <!-- ***** Logo Start ***** -->
+    <a href="{% url 'home' %}" class="logo">
+        <h2 style="color: azure;">GamersEdge</h2>
+        <!-- <img src="{% static 'images/logo.png' %}" alt="" style="width: 158px;"> -->
+    </a>
+    <!-- ***** Logo End ***** -->
+    <!-- ***** Menu Start ***** -->
+    <ul class="nav">
+      <li><a href="{% url 'home' %}" class="active">Home</a></li>
+      <li><a href="{% url 'shop' %}">Our Shop</a></li>
+      <li><a href="{% url 'contact' %}">Contact Us</a></li>
+      <li><a href="#">Sign In</a></li>
+  </ul>   
+    <a class='menu-trigger'>
+        <span>Menu</span>
+    </a>
+    <!-- ***** Menu End ***** -->
+</nav>
+<!-- Header End -->
