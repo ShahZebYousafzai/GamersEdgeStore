@@ -23,12 +23,18 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['password1'].widget.attrs['placeholder'] = 'Password'
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
 
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['display_name', 'profile_picture', 'date_of_birth', 'genre_preferences']
 
-# class UserProfileForm(UserProfile):
-#     class Meta:
-#         model = UserProfile
+    def __init__(self, *args, **kwargs):
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
 
-#         fields = ['username', 'display_name', 'date_of_birth', 'profile_picture', 'genre_preferences']
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'form-control'})  # Add Bootstrap class
 
-#     def __init__(self, *args, **kwargs):
-#         super(UserProfileForm, self).__init__(*args, **kwargs)
+    # You can also add placeholders to your form fields
+        self.fields['display_name'].widget.attrs['placeholder'] = 'Profile Name'
+        self.fields['data_of_birth'].widget.attrs['placeholder'] = 'Date of Birth'
+        self.fields['genre_preferences'].widget.attrs['placeholder'] = 'Preffered Genres'

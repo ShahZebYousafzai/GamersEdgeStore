@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, UserProfileForm
+from .models import UserProfile
 from django.contrib.auth import login, authenticate, logout
 
 
@@ -51,3 +52,18 @@ def registerView(request):
     context = {'form': form}
 
     return render(request, 'user/register.html', context)
+
+def profileView(request, pk):
+
+    user = request.user
+
+    profile = UserProfile.objects.get(user=user)
+
+    context = {'profile': profile}
+    
+    return render(request, 'user/profile.html', context)
+
+def createProfile(request):
+    context = {}
+
+    return render(request, 'user/create-profile.html', context)
