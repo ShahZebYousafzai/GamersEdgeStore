@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "compressor",
     
     "games.apps.GamesConfig",
+    "user.apps.UserConfig",
 ]
 
 MIDDLEWARE = [
