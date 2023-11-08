@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h3>Login</h3>
+        <h3>Register</h3>
         <span class="breadcrumb"><a href="#">Home</a>  >  Sign Up</span>
       </div>
     </div>
@@ -20,20 +20,27 @@
       <div class="col-10 col-sm-8 col-md-7 col-lg-5 col-xl-4 m-auto">
         <div class="card">
           <div class="card-body">
-            <div class="container d-flex justify-content-center align-items-center">
+            <!-- <div class="container d-flex justify-content-center align-items-center">
               <svg xmlns="http://www.w3.org/2000/svg" style="color: #0b5ed7;" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                   <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
               </svg>
-          </div>
-            <form action="">
-              <input type="text" name="" id="" class="form-control my-4 py-2" placeholder="Username" />
-              <input type="text" name="" id="" class="form-control my-4 py-2" placeholder="Password" />
-              <div class="text-center mt-3 d-grid gap-2">
-                <button class="btn btn-primary btn-large">Sign Up</button>
-                <a href="{% url 'login' %}" class="nav-link mt-3">Already have an account?</a>
-              </div>
-            </form>
+          </div> -->
+          <form action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3">
+              <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+              {{ field }}
+              {% for error in field.errors %}
+                <p style="color: red;">{{ error }}</p>
+              {% endfor %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <a href="{% url 'login' %}" class="nav-link mt-3">Already have an account?</a>
+          </form>
+          
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
 GamersEdgeStore\__pycache__
 games\__pycache__
 *.pyc
+db.sqlite3
