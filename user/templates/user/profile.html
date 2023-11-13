@@ -17,11 +17,20 @@
 <div class="section">
   <div class="container mt-5 pt-5">
     <div class="container">
-      <div class="row">
-          <div class="col-md-6">
+      <div class="row g-3">
+        <div class="col-md-2">
+          <ul>
+            <li>Profile</li>
+            <li>Purchases</li>
+            <li>Wishlist</li>
+            <li>Transactions</li>
+            <li>Profile Setting</li>
+          </ul>
+        </div>
+          <div class="col-md-2">
             <img src="{% static profile.profile_image.url %}" alt="{{ profile.user.username }}" class="img-fluid" style="height: 100px; width: 100px;">
           </div>
-          <div class="">
+          <div class="col-md-6">
               <h2>{{ profile.display_name }}</h2>
               <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
               <p><strong>Genre Preferences:</strong>
