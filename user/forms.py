@@ -26,7 +26,7 @@ class CustomUserCreationForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['display_name', 'profile_picture', 'date_of_birth', 'genre_preferences']
+        fields = ['display_name', 'profile_image', 'date_of_birth', 'genre_preferences']
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)

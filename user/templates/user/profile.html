@@ -19,9 +19,9 @@
     <div class="container">
       <div class="row">
           <div class="col-md-6">
-              <img src="{{ profile.profile_picture.url }}" alt="{{ profile.user.username }}" class="img-fluid">
+            <img src="{% static profile.profile_image.url %}" alt="{{ profile.user.username }}" class="img-fluid" style="height: 100px; width: 100px;">
           </div>
-          <div class="col-md-6">
+          <div class="">
               <h2>{{ profile.display_name }}</h2>
               <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
               <p><strong>Genre Preferences:</strong>

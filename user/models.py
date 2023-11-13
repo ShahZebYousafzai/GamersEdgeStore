@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     display_name = models.CharField(max_length=255)
-    profile_picture = models.ImageField(default='images\profiles\default.png', upload_to='profiles/', null=True, blank=True)
+    profile_image = models.ImageField(
+        null=True, blank=True, upload_to='profiles/', default="profiles/user-default.png")
     date_of_birth = models.DateField(null=True, blank=True)
     bio = models.TextField(blank=True)
     # game_library = models.ManyToManyField(Game)
