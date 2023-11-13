@@ -8,7 +8,8 @@ class Profile(models.Model):
     profile_image = models.ImageField(
         null=True, blank=True, upload_to='profiles/', default="profiles/user-default.png")
     date_of_birth = models.DateField(null=True, blank=True)
-    bio = models.TextField(blank=True)
+    permenant_address = models.CharField(max_length=250)
+    temporary_address = models.CharField(max_length=250)
     # game_library = models.ManyToManyField(Game)
     # wishlist = models.ManyToManyField(Game)
     purchase_history = models.ForeignKey('PurchaseHistory', on_delete=models.CASCADE, null=True, blank=True)
