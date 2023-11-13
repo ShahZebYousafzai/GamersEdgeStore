@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
+from .models import Profile
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, UserProfileForm
-from .models import UserProfile
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 
 
@@ -43,6 +44,8 @@ def registerView(request):
             
             user.save()
 
+            Profile.objects.create(user=user)
+
             login(request, user)
 
             return redirect('home')
@@ -53,11 +56,12 @@ def registerView(request):
 
     return render(request, 'user/register.html', context)
 
-def profileView(request, pk):
+@login_required(login_url='login')
+def profileView(request):
 
-    user = request.user
+    # user = request.user.profile
 
-    profile = UserProfile.objects.get(user=user)
+    profile = request.user.profile
 
     context = {'profile': profile}
     

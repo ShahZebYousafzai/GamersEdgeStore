@@ -14,9 +14,7 @@
         <li><a href="{% url 'shop' %}">Our Shop</a></li>
         <li><a href="{% url 'contact' %}">Contact Us</a></li>
         {% if request.user.is_authenticated %}
-            {% with profile=request.user.userprofile %}
-                <li><a href="{% url 'profile' profile.id %}">{{ request.user.username }}</a></li>
-            {% endwith %}
+            <li><a href="{% url 'profile' %}">{{ request.user.username }}</a></li>
             <li><a href="{% url 'logout' %}">Sign Out</a></li>
         {% else %}
             <li><a href="{% url 'login' %}">Sign In</a></li>

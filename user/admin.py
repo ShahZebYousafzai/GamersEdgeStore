@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import UserProfile, PurchaseHistory
+from .models import Profile, PurchaseHistory
 
 # Register your models here.
-admin.site.register(UserProfile)
+admin.site.register(Profile)
 admin.site.register(PurchaseHistory)

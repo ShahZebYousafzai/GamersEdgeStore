@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import Profile
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -25,7 +25,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = Profile
         fields = ['display_name', 'profile_picture', 'date_of_birth', 'genre_preferences']
 
     def __init__(self, *args, **kwargs):
