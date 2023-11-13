@@ -44,11 +44,9 @@ def registerView(request):
             
             user.save()
 
-            Profile.objects.create(user=user)
-
             login(request, user)
 
-            return redirect('home')
+            return redirect('create-profile')
         else:
             messages.error(request, 'There was an error in creating the account!')
 
@@ -59,15 +57,30 @@ def registerView(request):
 @login_required(login_url='login')
 def profileView(request):
 
-    # user = request.user.profile
-
     profile = request.user.profile
 
     context = {'profile': profile}
     
     return render(request, 'user/profile.html', context)
 
+@login_required(login_url='login')
 def createProfile(request):
-    context = {}
+    user = request.user
 
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST)
+
+        if form.is_valid():
+            # Save the form data and associate it with the user
+            user_profile = form.save(commit=False)
+            user_profile.user = user
+            user_profile.save()
+
+            # Redirect to the user's profile
+            return redirect('profile')  # Replace 'user_profile' with the actual URL name for the user's profile page
+
+    else:
+        form = UserProfileForm()
+
+    context = {"form": form}
     return render(request, 'user/create-profile.html', context)
