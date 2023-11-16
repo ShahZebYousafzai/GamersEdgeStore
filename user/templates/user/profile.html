@@ -1,14 +1,11 @@
-{% extends 'main.html' %}
-{% load static %}
-
-{% block content %}
+{% extends 'main.html' %} {% load static %} {% block content %}
 
 <div class="page-heading header-text">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
         <h3>User Profile</h3>
-        <span class="breadcrumb"><a href="#">Home</a>  >  Profile</span>
+        <span class="breadcrumb"><a href="#">Home</a> > Profile</span>
       </div>
     </div>
   </div>
@@ -19,7 +16,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3 mb-3 mb-sm-1">
-          <div class="card" style="width: auto; height: auto;">
+          <div class="card" style="width: auto; height: auto">
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Profile</li>
               <li class="list-group-item">Purchases</li>
@@ -30,23 +27,44 @@
           </div>
         </div>
         <div class="col-sm-9">
-          <div class="card">
-            <img src="{% static profile.profile_image.url %}" alt="{{ profile.user.username }}" class="img-fluid" style="height: 100px; width: 100px;">
-            <h2>{{ profile.display_name }}</h2>
-            <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
-            <p><strong>Genre Preferences:</strong>
-            <ul>
-              {% for genre in profile.genre_preferences.all %}
-                  <li>{{ genre.name }}</li>
-              {% endfor %}
-            </ul>
-            </p>
-          </div>
+          <div class="card" style="padding-left: 30px; padding-top: 30px">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="profile-picture"></div>
+                </div>
+                <div class="col-md-9">
+                    <h1>{{profile.display_name}}</h1>
+                    <p class="do-b">
+                        Date of Birth: <span class="span">{{profile.date_of_birth}}</span>
+                    </p>
+                    <p class="permanent-address">
+                        <span class="text-wrapper">Permanent Address: </span>
+                        <span class="span">Street#6, House#76B, New City Phase-1, G.T. Road Wah Cantt, Rawalpindi</span>
+                    </p>
+                    <p class="billing-address">
+                        <span class="text-wrapper">Billing Address: </span>
+                        <span class="span">Street#6, House#76B, New City Phase-1, G.T. Road Wah Cantt, Rawalpindi</span>
+                    </p>
+                    <div class="div">Genre Preferences:</div>
+                    <div class="row">
+                        {% for genre in profile.genre_preferences.all %}
+                            <div class="col-md-2 mb-2">
+                                <div class="grid">
+                                    <div class="overlap-group">
+                                        <div class="text-wrapper">{{ genre.name }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         </div>
       </div>
-  </div>
+    </div>
   </div>
 </div>
-
 
 {% endblock content %}
