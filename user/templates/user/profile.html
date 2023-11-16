@@ -29,38 +29,45 @@
         <div class="col-sm-9">
           <div class="card" style="padding-left: 30px; padding-top: 30px">
             <div class="row">
-                <div class="col-md-3">
-                    <div class="profile-picture"></div>
-                </div>
-                <div class="col-md-9">
-                    <h1>{{profile.display_name}}</h1>
-                    <p class="do-b">
-                        Date of Birth: <span class="span">{{profile.date_of_birth}}</span>
-                    </p>
-                    <p class="permanent-address">
-                        <span class="text-wrapper">Permanent Address: </span>
-                        <span class="span">Street#6, House#76B, New City Phase-1, G.T. Road Wah Cantt, Rawalpindi</span>
-                    </p>
-                    <p class="billing-address">
-                        <span class="text-wrapper">Billing Address: </span>
-                        <span class="span">Street#6, House#76B, New City Phase-1, G.T. Road Wah Cantt, Rawalpindi</span>
-                    </p>
-                    <div class="div">Genre Preferences:</div>
-                    <div class="row">
-                        {% for genre in profile.genre_preferences.all %}
-                            <div class="col-md-2 mb-2">
-                                <div class="grid">
-                                    <div class="overlap-group">
-                                        <div class="text-wrapper">{{ genre.name }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
+              <div class="col-md-3">
+                <div class="profile-picture"></div>
+              </div>
+              <div class="col-md-9">
+                <h1>{{profile.display_name}}</h1>
+                <p class="do-b">
+                  Date of Birth:
+                  <span class="span">{{profile.date_of_birth}}</span>
+                </p>
+                <p class="permanent-address">
+                  <span class="text-wrapper">Permanent Address: </span>
+                  <span class="span"
+                    >Street#6, House#76B, New City Phase-1, G.T. Road Wah Cantt,
+                    Rawalpindi</span
+                  >
+                </p>
+                <p class="billing-address">
+                  <span class="text-wrapper">Billing Address: </span>
+                  <span class="span"
+                    >Street#6, House#76B, New City Phase-1, G.T. Road Wah Cantt,
+                    Rawalpindi</span
+                  >
+                </p>
+                <div class="div">Genre Preferences:</div>
+                <div class="row">
+                  {% for genre in profile.genre_preferences.all %}
+                  <div class="col-md-2 mb-2">
+                    <div class="grid">
+                      <div class="overlap-group">
+                        <div class="text-wrapper">{{ genre.name }}</div>
+                        <i class="bi bi-x"></i>
+                      </div>
                     </div>
+                  </div>
+                  {% endfor %}
                 </div>
+              </div>
             </div>
-        </div>
-        
+          </div>
         </div>
       </div>
     </div>
