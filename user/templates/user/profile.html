@@ -17,30 +17,32 @@
 <div class="section">
   <div class="container mt-5 pt-5">
     <div class="container">
-      <div class="row g-3">
-        <div class="col-md-2">
-          <ul>
-            <li>Profile</li>
-            <li>Purchases</li>
-            <li>Wishlist</li>
-            <li>Transactions</li>
-            <li>Profile Setting</li>
-          </ul>
+      <div class="row">
+        <div class="col-sm-3 mb-3 mb-sm-1">
+          <div class="card" style="width: auto; height: auto;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Profile</li>
+              <li class="list-group-item">Purchases</li>
+              <li class="list-group-item">Wishlist</li>
+              <li class="list-group-item">Transactions</li>
+              <li class="list-group-item">Profile Settings</li>
+            </ul>
+          </div>
         </div>
-          <div class="col-md-2">
+        <div class="col-sm-9">
+          <div class="card">
             <img src="{% static profile.profile_image.url %}" alt="{{ profile.user.username }}" class="img-fluid" style="height: 100px; width: 100px;">
+            <h2>{{ profile.display_name }}</h2>
+            <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
+            <p><strong>Genre Preferences:</strong>
+            <ul>
+              {% for genre in profile.genre_preferences.all %}
+                  <li>{{ genre.name }}</li>
+              {% endfor %}
+            </ul>
+            </p>
           </div>
-          <div class="col-md-6">
-              <h2>{{ profile.display_name }}</h2>
-              <p><strong>Date of Birth:</strong> {{ profile.date_of_birth }}</p>
-              <p><strong>Genre Preferences:</strong>
-                  <ul>
-                      {% for genre in profile.genre_preferences.all %}
-                          <li>{{ genre.name }}</li>
-                      {% endfor %}
-                  </ul>
-              </p>
-          </div>
+        </div>
       </div>
   </div>
   </div>
