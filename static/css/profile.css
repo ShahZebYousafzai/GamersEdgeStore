@@ -1,9 +1,5 @@
-.list-group-item a:hover {
-  background-color: #a3a3a3; /* Use your desired shade of gray */
-}
-
-.list-group-item a:hover {
-  background-color: #f0f0f0; /* Use your desired shade of gray */
+.list-group-item:hover {
+  background-color: lightgray; /* Use your desired shade of gray */
 }
   
   .profile-picture {
