@@ -1,0 +1,19 @@
+.cart-btn {
+    position: absolute;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    width: 40px;
+    height: 40px;
+    background-color: #ee626b;
+    color: white;
+    border-radius: 50%;
+    right: 25px;
+    bottom: 25px;
+    transition: all .3s;
+    border: 0;
+}
+
+.cart-btn:hover {
+    color: #0071f8;
+}

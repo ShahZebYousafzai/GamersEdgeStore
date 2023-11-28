@@ -55,7 +55,9 @@
               <span class="category">{{genre.name}}</span>
             {% endfor %}
             <h4>{{game.title|slice:"16"}}</h4>
-            <a href="{% url 'game-details' game.id %}"><i class="fa fa-shopping-bag"></i></a>
+            <!-- <a></a> -->
+            <!-- <div class="cart-btn"><i class="fa fa-shopping-cart"></i></div> -->
+            <button data-game={{game.id}} data-action="add" class="cart-btn add-btn update-cart"><i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
       </div>

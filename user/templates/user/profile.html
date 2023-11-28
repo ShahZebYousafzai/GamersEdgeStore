@@ -16,13 +16,13 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-12 mb-3 mb-sm-1">
-          <div class="card">
+          <div class="card" style="padding: 14px;">
             <ul class="list-group list-group-flush text-center">
               <li class="list-group-item"><a href="" style="color: black;">Profile</a></li>
-              <li class="list-group-item"><a href="" style="color: black;">Purchases</a></li>
+              <li class="list-group-item"><a href="{% url 'purchases' %}" style="color: black;">Purchases</a></li>
               <li class="list-group-item"><a href="" style="color: black;">Wishlist</a></li>
               <li class="list-group-item"><a href="" style="color: black;">Transactions</a></li>
-              <li class="list-group-item"><a href="" style="color: black;">Profile Settings</a></li>
+              <li class="list-group-item"><a href="" style="color: black;">Update Profile</a></li>
             </ul>            
           </div>
         </div>
@@ -30,7 +30,7 @@
           <div class="card"><!-- style="padding-left: 30px; padding-top: 30px" -->
             <div class="row p-3">
               <div class="col-md-3">
-                <div class="profile-picture"></div>
+                <img class="profile-picture" src="{{profile.profile_image.url}}" alt="">
               </div>
               <div class="col-md-9">
                 <h1>{{profile.display_name}}</h1>
@@ -71,7 +71,62 @@
                 </div>
               </div>
             </div>
-          </>
+          </div>
+          <br>
+        </div>
+      </div>
+
+      <div class="card p-4 gap-3">
+        <div class="row">
+          <div class="col-lg-11 text-right">
+            <h1>Your Purchases</h1>
+          </div>
+          <div class="col text-right">
+            <a href=""><h6>View All</h6></a>
+          </div>
+        </div>
+        <div class="row p-3 rounded bg-primary bg-gradient">
+          <div class="col">
+            <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
+          </div>
+          <div class="col-lg-10">
+            <h2 style="color: white;">Assassins Creed</h2>
+          </div>
+        </div>
+        <div class="row p-3 rounded bg-primary bg-gradient">
+          <div class="col">
+            <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
+          </div>
+          <div class="col-lg-10">
+            <h2 style="color: white;">Assassins Creed</h2>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="card p-4 gap-3">
+        <div class="row">
+          <div class="col-lg-11 text-right">
+            <h1>Your Wishlist</h1>
+          </div>
+          <div class="col text-right">
+            <a href=""><h6>View All</h6></a>
+          </div>
+        </div>
+        <div class="row p-3 rounded bg-primary bg-gradient">
+          <div class="col">
+            <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
+          </div>
+          <div class="col-lg-10">
+            <h2 style="color: white;">Assassins Creed</h2>
+          </div>
+        </div>
+        <div class="row p-3 rounded bg-primary bg-gradient">
+          <div class="col">
+            <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
+          </div>
+          <div class="col-lg-10">
+            <h2 style="color: white;">Assassins Creed</h2>
+          </div>
         </div>
       </div>
     </div>

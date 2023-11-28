@@ -1,5 +1,7 @@
+import json
 from .models import Game
 from django.shortcuts import render
+from django.http import JsonResponse
 
 def homePage(request):
     context = {}
@@ -18,4 +20,19 @@ def gameDetail(request, pk):
 def contactView(request):
     context = {}
     return render(request, 'games/contact.html', context)
+
+def updateItem(request):
+    data = json.loads(request.body)
+    gameID = data['gameID']
+    action = data['action']
+    print('Action: ', action)
+    print('Game: ', gameID)
+    
+    user = request.user
+    
+    game = Game.objects.get(id=gameID)
+    
+    # order, created = 
+    
+    return JsonResponse("Item was added", safe=False)
 

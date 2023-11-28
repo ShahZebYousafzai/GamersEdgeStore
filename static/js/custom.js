@@ -48,7 +48,6 @@
 	// bind filter button click
 	$('.trending-filter').on( 'click', 'a', function() {
 		var filterValue = $( this ).attr('data-filter');
-		console.log(filterValue);
 		// use filterFn if matches value
 		filterValue = filterFns[ filterValue ] || filterValue;
 		$grid.isotope({ filter: filterValue });

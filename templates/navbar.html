@@ -14,7 +14,8 @@
         <li><a href="{% url 'shop' %}">Our Shop</a></li>
         <li><a href="{% url 'contact' %}">Contact Us</a></li>
         {% if request.user.is_authenticated %}
-            <li><a href="{% url 'profile' %}">{{ request.user.username }}</a></li>
+        <li><a href="{% url 'profile' %}">{{ request.user.username }}</a></li>
+        <li><a href=""><i class="bi bi-cart-fill" style="color: white;"></i></a></li>
             <li><a href="{% url 'logout' %}">Sign Out</a></li>
         {% else %}
             <li><a href="{% url 'login' %}">Sign In</a></li>

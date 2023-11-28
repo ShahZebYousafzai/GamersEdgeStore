@@ -64,6 +64,20 @@ def profileView(request):
     return render(request, 'user/profile.html', context)
 
 @login_required(login_url='login')
+def purchaseView(request):
+
+    context = {}
+    
+    return render(request, 'user/purchases.html', context)
+
+@login_required(login_url='login')
+def wishlistView(request):
+
+    context = {}
+    
+    return render(request, 'user/wishlist.html', context)
+
+@login_required(login_url='login')
 def createProfile(request):
     user = request.user
 
@@ -75,6 +89,9 @@ def createProfile(request):
             user_profile = form.save(commit=False)
             user_profile.user = user
             user_profile.save()
+
+            # You might need to save the many-to-many relationships separately
+            form.save_m2m()
 
             # Redirect to the user's profile
             return redirect('profile')  # Replace 'user_profile' with the actual URL name for the user's profile page

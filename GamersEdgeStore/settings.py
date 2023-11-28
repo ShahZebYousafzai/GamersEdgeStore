@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-!$enk%xbh6zh^nw+p5q%%15#tp3c*lac49b2ouhop2_h#o%gu9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.10']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -124,14 +124,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'static'
+    os.path.join(BASE_DIR, 'static'),
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Tell django the directory where content will be uploaded by user
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'images')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')   # When in production
 # after this run python manage.py collectstatic for staticfiles
 
 # Default primary key field type

@@ -4,7 +4,8 @@ from games import views
 
 urlpatterns = [
     path("", views.homePage, name='home'),
-    path("shop", views.gamesShop, name='shop'),
+    path("shop/", views.gamesShop, name='shop'),
+    path("update-item/", views.updateItem, name='update-item'),
     path("game-details/<str:pk>", views.gameDetail, name='game-details'),
     path("contact/", views.contactView, name='contact'),
 ]
