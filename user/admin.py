@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Profile, PurchaseHistory
+from .models import Profile, UserPurchaseHistory, UserWishlist
 
 # Register your models here.
 admin.site.register(Profile)
-admin.site.register(PurchaseHistory)
+admin.site.register(UserPurchaseHistory)
+admin.site.register(UserWishlist)

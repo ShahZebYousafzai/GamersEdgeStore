@@ -10,16 +10,25 @@ class Profile(models.Model):
     date_of_birth = models.DateField(null=True, blank=True)
     permenant_address = models.CharField(max_length=250)
     temporary_address = models.CharField(max_length=250)
-    # game_library = models.ManyToManyField(Game)
-    # wishlist = models.ManyToManyField(Game)
-    purchase_history = models.ForeignKey('PurchaseHistory', on_delete=models.CASCADE, null=True, blank=True)
+    city = models.CharField(max_length=200, null=False)
+    state = models.CharField(max_length=200, null=False)
+    zipcode = models.CharField(max_length=200, null=False)
+    wishlist = models.ForeignKey('UserWishlist', on_delete=models.CASCADE, null=True, blank=True)
+    purchase_history = models.ForeignKey('UserPurchaseHistory', on_delete=models.CASCADE, null=True, blank=True)
     genre_preferences = models.ManyToManyField(Genre)  # Many-to-many relationship with genres
+    date_added = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return str(self.user)
 
+class UserPurchaseHistory(models.Model):
+    user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
-class PurchaseHistory(models.Model):
+    def __str__(self):
+        return self.user_profile
+
+class UserWishlist(models.Model):
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
