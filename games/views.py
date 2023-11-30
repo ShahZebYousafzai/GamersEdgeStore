@@ -1,5 +1,5 @@
 import json
-from .models import Game
+from .models import Game, GameOrder, GameItem
 from django.shortcuts import render
 from django.http import JsonResponse
 
@@ -21,6 +21,10 @@ def contactView(request):
     context = {}
     return render(request, 'games/contact.html', context)
 
+def cartView(request):
+    context = {}
+    return render(request, 'games/cart.html', context)
+
 def updateItem(request):
     data = json.loads(request.body)
     gameID = data['gameID']
@@ -32,7 +36,12 @@ def updateItem(request):
     
     game = Game.objects.get(id=gameID)
     
-    # order, created = 
+    order, created = GameOrder.objects.get_or_create(customer=user)
+    orderItem, created = GameItem.objects.get_or_create(order=order, game=game)
+    
+    
+    print((orderItem.game.genres.name))
+    # orderItem.save()
     
     return JsonResponse("Item was added", safe=False)
 

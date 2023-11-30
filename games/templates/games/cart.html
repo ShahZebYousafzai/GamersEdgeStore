@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="page-heading header-text">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Your Cart</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="h3">#</th>
+                <th scope="col" class="h3">Thumbnail</th>
+                <th scope="col" class="h3">Game Name</th>
+                <th scope="col" class="h3">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td><img class="rounded" src="https://hb.imgix.net/40ec7f9d120bc38fbedd957212d806ec3c80cb60.jpg?auto=compress,format&amp;fit=crop&amp;h=206&amp;w=360&amp;s=b35cda89deb0c360db249c2b8418905a" alt="" style="width: 30%;"></td>
+                <td class="h5">Example Game 1</td>
+                <td class="h5">$19.99</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <!-- <td><img src="https://hb.imgix.net/40ec7f9d120bc38fbedd957212d806ec3c80cb60.jpg?auto=compress,format&amp;fit=crop&amp;h=206&amp;w=360&amp;s=b35cda89deb0c360db249c2b8418905a" alt=""></td> -->
+                <td><img class="rounded" src="https://hb.imgix.net/40ec7f9d120bc38fbedd957212d806ec3c80cb60.jpg?auto=compress,format&amp;fit=crop&amp;h=206&amp;w=360&amp;s=b35cda89deb0c360db249c2b8418905a" alt="" style="width: 30%;"></td>
+                <td class="h5">Example Game 2</td>
+                <td class="h5">$29.99</td>
+            </tr>
+            <!-- Add more rows for additional games -->
+        </tbody>
+    </table>
+    <div class="row mt-5">
+        <div class="col-10">
+            <h4>Total: $49.98</h4>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-primary btn-lg">Checkout</button>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
