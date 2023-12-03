@@ -29,7 +29,31 @@ class GameOrder(models.Model):
     def __str__(self):
         return str(self.id)
 
+    @property
+    def get_cart_total(self):
+        gameitems = self.gameitem_set.all()
+        total = sum([gameitem.get_total for gameitem in gameitems])
+        return total
+
+    @property
+    def get_cart_items(self):
+        gameitems = self.gameitem_set.all()
+        total = sum([gameitem.quantity for gameitem in gameitems])
+        return total
+
 class GameItem(models.Model):
     game = models.ForeignKey(Game, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(GameOrder, on_delete=models.SET_NULL, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.game.title
+
+    @property
+    def get_total(self):
+        total = self.product_price
+        return total
+    
+    @property
+    def quantity(self):
+        return 1

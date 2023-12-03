@@ -9,7 +9,7 @@ for(var i=0; i < updateBtns.length; i++) {
             console.log('Not logged in')
         }
         else{
-            updateUserOrder(gameID, action)
+            updateUserOrder(gameID, action) 
         }
 
     })
