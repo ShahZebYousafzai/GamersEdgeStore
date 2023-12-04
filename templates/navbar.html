@@ -14,11 +14,23 @@
         <li><a href="{% url 'contact' %}">Contact Us</a></li>
         {% if request.user.is_authenticated %}
         <li><a href="{% url 'profile' %}">{{ request.user.username }}</a></li>
-        <li class="d-flex align-items-center"> <!-- Use Bootstrap's flex utility classes -->
+        <!-- <li class="d-flex align-items-center">
             <a href="{% url 'cart' %}">
                 <i class="bi bi-cart-fill" style="color: white;"></i>
             </a>
             <p id="cart-total" class="mb-0 ml-1 text-center">{{cartItems}}</p>
+        </li> -->
+        <!-- <li><a href="{% url 'cart' %}"><i class="bi bi-cart-fill"><p id="cart-total">{{cartItems}}</p></i></a></li> -->
+
+        <li>
+            <a href="{% url 'cart' %}">
+                <button type="button" class="btn btn-primary position-relative" style="background: None; border: 0;">
+                    <i class="bi bi-cart-fill"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle px-2 py-1 bg-danger rounded-circle" style="font-size: 12px;">
+                      <span>{{cartItems}}</span>
+                    </span>
+                  </button>
+            </a>
         </li>
         <li><a href="{% url 'logout' %}">Sign Out</a></li>
         {% else %}

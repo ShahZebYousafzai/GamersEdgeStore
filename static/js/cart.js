@@ -9,9 +9,8 @@ for(var i=0; i < updateBtns.length; i++) {
             console.log('Not logged in')
         }
         else{
-            updateUserOrder(gameID, action) 
+            updateUserOrder(gameID, action)
         }
-
     })
 }
 
@@ -36,5 +35,6 @@ function updateUserOrder(gameID, action) {
 
     .then((data) => {
         console.log('Data:', data);
+        location.reload;
     })
 }

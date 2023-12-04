@@ -21,15 +21,17 @@
                 <th scope="col" class="h3">Thumbnail</th>
                 <th scope="col" class="h3">Game Name</th>
                 <th scope="col" class="h3">Price</th>
+                <th scope="col" class="h3"></th>
             </tr>
         </thead>
         <tbody>
             {% for game_item in games.all %}
-            <tr>
+            <tr class="align-middle">
                 <th scope="row">{{ game_item.id }}</th>
                 <td><img class="rounded" src="{{ game_item.game.image_url }}" alt="" style="width: 30%;"></td>
                 <td class="h5">{{ game_item.game.title }}</td>
                 <td class="h5 align-left">${{ game_item.game.price }}</td>
+                <td><i class="bi bi-trash"></i></td>
             </tr>
             {% endfor %}
             <!-- Add more rows for additional games -->
@@ -37,7 +39,7 @@
     </table>
     <div class="row mt-5">
         <div class="col-10">
-            <h4>Total: $49.98</h4>
+            <h4>Total: ${{cartTotal}}</h4>
         </div>
         <div class="col-md-1">
             <button class="btn btn-primary btn-lg">Checkout</button>

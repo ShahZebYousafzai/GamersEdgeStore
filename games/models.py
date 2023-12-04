@@ -51,8 +51,8 @@ class GameItem(models.Model):
 
     @property
     def get_total(self):
-        total = self.product_price
-        return total
+        price = self.game.price
+        return price
     
     @property
     def quantity(self):
