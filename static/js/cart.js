@@ -5,6 +5,8 @@ for(var i=0; i < updateBtns.length; i++) {
         var gameID = this.dataset.game
         var action = this.dataset.action
 
+        console.log(action)
+
         if(user === 'AnonymousUser'){
             console.log('Not logged in')
         }
@@ -25,16 +27,28 @@ function updateUserOrder(gameID, action) {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrftoken,
         },
-        body: JSON.stringify({'gameID': gameID, 'action': action})
+        body: JSON.stringify({
+            'gameID': gameID,
+            'action': action,
+            'user': user  // Pass the user information
+        })
     })
 
     .then((response) => {
+        // Check if the response status is OK (200)
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
         // Call json() method to parse the response body as JSON
         return response.json();
     })
 
     .then((data) => {
         console.log('Data:', data);
-        location.reload;
+        // Reload the page after updating the cart
+        location.reload();
     })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }

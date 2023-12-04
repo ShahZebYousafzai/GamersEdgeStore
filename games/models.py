@@ -42,6 +42,7 @@ class GameOrder(models.Model):
         return total
 
 class GameItem(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     game = models.ForeignKey(Game, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(GameOrder, on_delete=models.SET_NULL, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
