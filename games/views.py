@@ -2,6 +2,7 @@ import json
 from .models import Game, GameOrder, GameItem
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 def get_user_order(request):
     if request.user.is_authenticated:
@@ -47,7 +48,7 @@ def cartView(request):
     context = {'cartItems': cart_items, 'games': games, 'cartTotal': cart_total}
     return render(request, 'games/cart.html', context)
 
-def updateItem(request):
+def addItem(request):
     data = json.loads(request.body)
     game_id = data['gameID']
     action = data['action']
@@ -61,18 +62,24 @@ def updateItem(request):
     # Get or create the GameItem for the given game and order
     order_item, created = GameItem.objects.get_or_create(order=order, game=game, customer=user)
 
-    # Update quantity based on the action (add or remove)
-    # if action == 'add':
-    #     order_item.quantity += 1
-    # if action == 'remove':
-    #     print("deleting item ...")
-        # order_item.quantity -= 1
-
     # Save the GameItem
     order_item.save()
 
-    # # If the quantity is zero, delete the GameItem
-    # if order_item.quantity <= 0:
-    #     order_item.delete()
+    return JsonResponse("Item was added", safe=False)
 
-    return JsonResponse("Item was added/removed", safe=False)
+def deleteItem(request):
+    data = json.loads(request.body)
+    game_id = data['gameID']
+    action = data['action']
+
+    print("GameID: " + game_id, "Action: " + action)
+
+    user = request.user
+
+    game_item = GameItem.objects.get(id=game_id)
+
+    if action == "remove":
+        print(f"deleting item {game_item.game.title}")
+        game_item.delete()
+
+    return JsonResponse("Item was deleted", safe=False)
