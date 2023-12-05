@@ -3,21 +3,7 @@ from .models import Game, GameOrder, GameItem
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-
-def get_user_order(request):
-    if request.user.is_authenticated:
-        user = request.user
-        order, created = GameOrder.objects.get_or_create(customer=user)
-        item = order.gameitem_set.all()
-        cart_items = order.get_cart_items
-        cart_total = order.get_cart_total
-    else:
-        items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
-        cart_items = order['get_cart_items']
-        cart_total = order['get_cart_total']
-
-    return cart_items, cart_total
+from utils import *
 
 def homePage(request):
     cart_items, _ = get_user_order(request)
