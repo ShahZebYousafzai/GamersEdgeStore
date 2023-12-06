@@ -2,7 +2,6 @@ import uuid
 from django.db import models
 from django.contrib.auth.models import User
 
-
 class Genre(models.Model):
     name = models.CharField(max_length=50)
 
@@ -17,6 +16,7 @@ class Game(models.Model):
     publisher = models.CharField(max_length=100)
     Description = models.TextField(blank=True)
     genres = models.ManyToManyField(Genre)
+    # digital = models.BooleanField(default=True, null=True, blank=False) # For physical item
 
     def __str__(self):
         return self.title
@@ -28,6 +28,16 @@ class GameOrder(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+    # For physical item
+    # @property
+    # def shipping(self):
+    #     shipping = False
+    #     gameitems = self.gameitem_set.all()
+    #     for i in gameitems:
+    #         if i.game.digital==False:
+    #             shipping=True
+    #     return shipping
 
     @property
     def get_cart_total(self):

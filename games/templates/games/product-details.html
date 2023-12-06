@@ -26,13 +26,12 @@
         <span class="price">${{game.price}}</span>
         <p>LUGX Gaming Template is based on the latest Bootstrap 5 CSS framework. This template is provided by TemplateMo and it is suitable for your gaming shop ecommerce websites. Feel free to use this for any purpose. Thank you.</p>
         <form id="qty" action="#">
-          <input type="qty" class="form-control" id="1" aria-describedby="quantity" placeholder="1">
-          <button type="submit"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
+          <button data-game={{game.id}} data-action="add" class="update-cart"><i class="fa fa-shopping-bag update-cart"></i> ADD TO CART</button>
         </form>
         <ul>
           <li><span>Genre:</span> 
           {% for genre in game.genres.all %}
-              <a href="#">{{genre.name}}</a>
+            <span class="genre-batch badge text-bg-light">{{genre.name}}</span>
           {% endfor %}
             <li><span>Publisher:</span> <a href="#">{{game.publisher}}</a>
         </ul>

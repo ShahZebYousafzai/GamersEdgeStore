@@ -1,0 +1,138 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-heading header-text">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Checkout</h3>
+        <span class="breadcrumb"><a href="#">Home</a>  >  Cart > Checkout</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="checkout-page section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6" id="form-wrapper">
+                <div class="card p-4">
+                    <form id="form" action="javascript:void(0);" onSubmit="formsubmit(event)">
+                        <div id="user-info">
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-field">
+                                <input required class="form-control" type="text" name="name" placeholder="Name...">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-field">
+                                <input required class="form-control" type="email" name="email" placeholder="Email...">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div id="shipping-info">
+                          <hr>
+                          <p>Shipping Information</p>
+                          <hr>
+                          
+                          <div class="row" style="padding-bottom: 10px;">
+                            <div class="col">
+                              <div class="form-field">
+                                <input class="form-control" type="text" name="address" placeholder="Address...">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-field">
+                                <input class="form-control" type="text" name="city" placeholder="City...">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-bottom: 10px;">
+                            <div class="col">
+                              <div class="form-field">
+                                <input class="form-control" type="text" name="state" placeholder="State...">
+                              </div>
+                            </div>
+                            <div class="col">
+                              <div class="form-field">
+                                <input class="form-control" type="text" name="zipcode" placeholder="Zip code...">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-field">
+                                <input class="form-control" type="text" name="country" placeholder="Country...">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <br>
+                        <button id="form-button" class="btn btn-primary" type="submit">
+                          Continue
+                          </button>
+                    </form>
+                    <hr>
+                    <div class="col-lg-6 d-none" id="payment-info">
+                      <small>Payment Info</small>
+                      <button id="make-payment">Make Payment</button>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            
+            <div class="col-lg-6" id="item-info">
+              <div class="card p-4">
+                <div class="row">
+                  <div class="col-6">
+                    <a class="btn btn-outline-secondary" href="{% url 'cart' %}"><i class="bi bi-arrow-left"></i> Back to Cart</a>
+                  </div>
+                </div>
+                <hr>
+                <h3>Order Summary</h3>
+                <hr>
+                {% for game_item in games.all %}
+                <div class="row p-3 align-items-center">
+                  <div style="flex:2"><img style="width: 50%;" class="row rounded" src="{{ game_item.game.image_url }}" alt=""></div>
+                  <div style="flex:2"><p>{{ game_item.game.title }}</p></div>
+                  <div style="flex:1"><p>${{ game_item.game.price }}</p></div>
+                </div>
+                {% endfor %}
+                <hr>
+                <div>
+                  <h5 class="p-1">Items: {{cartItems}}</h5>
+                  <h5 class="p-1">Total: ${{cartTotal|floatformat:2}}</h5>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- For Physical Item -->
+<script type="text/javascript">
+  // var shipping = '{{order.shipping}}'
+
+  // if(shipping == 'False'){
+  //   document.getElementById('shipping-info').innerHTML = ''
+  // }
+
+  function formsubmit(e){
+    e.preventDefault();
+    console.log('Submitting data...');
+
+    var formBtn = document.getElementById('form-button');
+    var paymentInfo = document.getElementById('payment-info');
+
+    formBtn.classList.add('d-none');
+    paymentInfo.classList.remove('d-none');
+    return 0; 
+  }
+</script>
+{% endblock content %}

@@ -9,8 +9,8 @@ def get_user_order(request):
         cart_total = order.get_cart_total
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cart_items = order['get_cart_items']
         cart_total = order['get_cart_total']
 
-    return cart_items, cart_total
+    return cart_items, cart_total, order

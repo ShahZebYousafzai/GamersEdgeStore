@@ -1,6 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, ShippingAddress
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -26,7 +25,7 @@ class CustomUserCreationForm(UserCreationForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['display_name', 'profile_image', 'date_of_birth', 'permenant_address', 'temporary_address', 'genre_preferences']
+        fields = ['display_name', 'profile_image', 'date_of_birth', 'genre_preferences']
         widgets = {
             'genre_preferences': forms.CheckboxSelectMultiple(),
         }
@@ -34,11 +33,17 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
 
-        # for name, field in self.fields.items():
-        #     field.widget.attrs.update({'class': 'form-control'})  # Add Bootstrap class
-
-    # You can also add placeholders to your form fields
         self.fields['display_name'].widget.attrs['placeholder'] = 'Profile Name'
         self.fields['date_of_birth'].widget.attrs['placeholder'] = 'Date of Birth'
-        self.fields['permenant_address'].widget.attrs['placeholder'] = 'Permanent Address'
-        self.fields['temporary_address'].widget.attrs['placeholder'] = 'Billing Address'
+
+class ShippingAddressForm(forms.ModelForm):
+    class Meta:
+        model = ShippingAddress
+        fields = ['address', 'city', 'state', 'zipcode']
+
+    def __init__(self, *args, **kwargs):
+        self.fields['address'].widgets['placeholder'] = 'Address...'
+        self.fields['city'].widgets['placeholder'] = 'City...'
+        self.fields['state'].widgets['placeholder'] = 'State...'
+        self.fields['zipcode'].widgets['placeholder'] = 'Zip Code...'
+
