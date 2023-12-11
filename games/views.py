@@ -1,8 +1,10 @@
 import json
 from .utils import *
+import datetime
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Game, GameOrder, GameItem
+from user.models import ShippingAddress
 
 def homePage(request):
     cart_items, _, _ = get_user_order(request)
@@ -35,6 +37,7 @@ def cartView(request):
     return render(request, 'games/cart.html', context)
 
 def checkoutView(request):
+    user = request.user
     games = GameItem.objects.filter(customer=request.user)
     cart_items, cart_total, order = get_user_order(request)
     context = {'cartItems': cart_items, 'games': games, 
@@ -70,3 +73,33 @@ def deleteItem(request):
         game_item.delete()
 
     return JsonResponse("Item was deleted", safe=False)
+
+def processOrder(request):
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+    
+    if request.user.is_authenticated:
+        user = request.user
+        order, created = GameOrder.objects.get_or_create(customer=user, complete=False)
+        total = float(data['form']['total'])
+        order.transaction_id = transaction_id
+        
+        if total == order.get_cart_total:
+            order.complete = True
+        order.save()
+        
+        if order.shipping == True:
+            print("Saving shipping data...")
+            ShippingAddress.objects.create(
+                customer = user,
+                order = order,
+                address = data['shipping']['address'],
+                city = data['shipping']['city'],
+                state = data['shipping']['state'],
+                zipcode = data['shipping']['zipcode']
+            )
+        
+    else:
+        print("User is not authenticated")
+    print('Data:', request.body)
+    return JsonResponse("Payment Complete", safe=False)
