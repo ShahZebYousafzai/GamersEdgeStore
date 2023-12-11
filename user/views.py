@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Profile
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm, UserProfileForm
+from .forms import CustomUserCreationForm, UserProfileForm, ShippingAddressForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 
@@ -94,10 +94,37 @@ def createProfile(request):
             form.save_m2m()
 
             # Redirect to the user's profile
-            return redirect('profile')  # Replace 'user_profile' with the actual URL name for the user's profile page
+            return redirect('create-shipping')  # Replace 'user_profile' with the actual URL name for the user's profile page
 
     else:
         form = UserProfileForm()
 
     context = {"form": form}
     return render(request, 'user/create-profile.html', context)
+
+@login_required(login_url='login')
+def createAddresses(request):
+    
+    user = request.user
+    
+    if request.method == 'POST':
+        form = ShippingAddressForm(request.POST)
+        
+        if form.is_valid():
+            print('Valid')
+            shipping_address = form.save(commit=False)
+            
+            # Fetch the user's profile
+            user_profile = Profile.objects.get(user=user)
+            
+            # Assign the profile to the customer field
+            shipping_address.customer = user_profile
+            shipping_address.save()
+            
+            return redirect('profile')  # Fixed the typo in redirect function
+        
+    else:
+        form = ShippingAddressForm()
+    
+    context = {'form': form}
+    return render(request, 'user/shippiong_information.html', context)
