@@ -1,10 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, UserWishlist, UserPurchaseHistory
+from games.models import Game, GameOrder, GameItem
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, UserProfileForm, ShippingAddressForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
+from games.utils import *
 
 
 # Create your views here.
@@ -56,24 +58,59 @@ def registerView(request):
 
 @login_required(login_url='login')
 def profileView(request):
+    cart_items, _, _ = get_user_order(request)
 
     profile = request.user.profile
+    
+    purchase_history = UserPurchaseHistory.objects.filter(user_profile=profile) 
+    
+    wishlist = UserWishlist.objects.filter(user_profile=profile)
 
-    context = {'profile': profile}
+    p_games = [ph.game for ph in purchase_history]
+
+    p_games = p_games[:3]
+
+    w_games = [w_games.game for w_games in wishlist]
+
+    w_games = w_games[:3]
+
+    context = {'profile': profile, 'p_games': p_games, 'w_games': w_games, 'cartItems': cart_items}
     
     return render(request, 'user/profile.html', context)
 
 @login_required(login_url='login')
 def purchaseView(request):
+    
+    if request.user.is_authenticated:
+        cart_items, _, _ = get_user_order(request)
+        
+        user = request.user
+        
+        profile = Profile.objects.get(user=user)
+        
+        purchase_history = UserPurchaseHistory.objects.filter(user_profile=profile)
 
-    context = {}
+        games = [ph.game for ph in purchase_history]
+
+        context = {'games': games, 'cartItems': cart_items}
     
     return render(request, 'user/purchases.html', context)
 
 @login_required(login_url='login')
 def wishlistView(request):
+    
+    cart_items, _, _ = get_user_order(request)
+    
+    user = request.user
+    
+    profile = Profile.objects.get(user=user)
 
-    context = {}
+    if user.is_authenticated:
+        wishlist = UserWishlist.objects.filter(user_profile=profile)
+
+    games = [w_games.game for w_games in wishlist]
+
+    context = {'games': games, 'cartItems': cart_items}
     
     return render(request, 'user/wishlist.html', context)
 
@@ -111,7 +148,7 @@ def createAddresses(request):
         form = ShippingAddressForm(request.POST)
         
         if form.is_valid():
-            print('Valid')
+
             shipping_address = form.save(commit=False)
             
             # Fetch the user's profile
@@ -128,3 +165,39 @@ def createAddresses(request):
     
     context = {'form': form}
     return render(request, 'user/shippiong_information.html', context)
+
+@login_required(login_url='login')
+def confimationView(request):
+    cart_items, _, _ = get_user_order(request)
+    
+    user = request.user
+    
+    if request.method == 'POST':
+        game_order = GameOrder.objects.get(customer=user.id)
+        game_items = GameItem.objects.filter(customer=user.id, order=game_order)
+        
+        for game_item in game_items:
+            purchase_history = UserPurchaseHistory.objects.create(
+                user_profile=user.profile,
+                game=game_item.game,
+            )
+            
+            # Increment downloads for each game in the order
+            game = game_item.game
+            game.downloads = (game.downloads or 0) + 1
+            game.save()
+
+        game_order.complete = True
+        game_order.save()
+        
+        game_items.delete()
+        
+        return redirect('home')
+
+    else:
+        print('Requesting Not confirm')
+    
+    context = {'cartItems': cart_items}
+    
+    return render(request, 'user/payment_confirmation.html', context)
+

@@ -17,7 +17,7 @@ class Game(models.Model):
     digital = models.BooleanField(default=False, null=True, blank=True)
     Description = models.TextField(blank=True)
     genres = models.ManyToManyField(Genre)
-    # digital = models.BooleanField(default=True, null=True, blank=False) # For physical item
+    downloads = models.IntegerField(null=True, blank=True, default=0)
 
     def __str__(self):
         return self.title

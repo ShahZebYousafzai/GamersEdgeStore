@@ -1,0 +1,124 @@
+.list-group-item:hover {
+  background-color: lightgray; /* Use your desired shade of gray */
+}
+  
+  .profile-picture {
+    width: 153.5px;
+    height: 148.5px;
+    border-radius: 76.75px/74.25px;
+  }
+  
+  .display-name {
+    top: 20px;
+    left: 192.5px;
+    font-family: "Inter-Bold", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 25px;
+    letter-spacing: 0;
+    line-height: 45.7px;
+    white-space: nowrap;
+  }
+  
+  .do-b {
+    top: 60px;
+    left: 192.5px;
+    font-family: "Inter-Bold", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 27.4px;
+    white-space: nowrap;
+  }
+  
+  .permenant-address {
+    top: 140px;
+    left: 20px;
+    font-family: "Inter-Bold", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 27.4px;
+    white-space: nowrap;
+  }
+  
+  .text-wrapper {
+    font-weight: 700;
+  }
+  
+  .span {
+    font-family: "Inter-Regular", Helvetica;
+  }
+  
+  .billing-address {
+    font-family: "Inter-Bold", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 27.4px;
+    white-space: nowrap;
+  }
+  
+  .div {
+    top: 90px;
+    left: 192.5px;
+    font-family: "Inter-Bold", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 15px;
+    letter-spacing: 0;
+    line-height: 27.4px;
+    white-space: nowrap;
+  }
+  
+  .genres {
+    width: 100%; /* Use 100% to ensure the genres span the full width of the container */
+    height: 33px;
+  }
+  
+  .genre {
+    width: 105.5px;
+    height: 33px;
+  }
+  
+  .overlap-group {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the text horizontally */
+    width: 104.5px;
+    height: 33px;
+    background-color: #d9d9d9;
+    border-radius: 16.25px;
+  }
+
+  .text-wrapper {
+    width: 77.5px;
+    top: 2.5px;
+    left: 14px;
+    font-family: "Inter-Bold", Helvetica;
+    font-weight: 700;
+    color: #000000;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 27.4px;
+    white-space: nowrap;
+  }
+  
+  .overlap-wrapper {
+    width: 105.5px;
+    height: 33px;
+    top: 0;
+    left: 116.5px;
+  }
+  
+  .overlap-group-wrapper {
+    width: 105.5px;
+    height: 33px;
+    top: 0;
+    left: 233px;
+  }
+  

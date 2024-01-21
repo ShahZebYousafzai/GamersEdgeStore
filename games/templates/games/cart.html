@@ -30,7 +30,7 @@
                 <h5 class="mb-0">${{ game_item.game.price }}</h5>
               </div>
               <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                <button data-game="{{game_item.id}}" data-action="remove" class="badge text-dark delete-cart" style="border: 0; background-color: white">
+                <button data-game="{{game_item.game.id}}" data-action="remove" class="badge text-dark delete-cart" onclick="deleteFromCart(this)" style="border: 0; background-color: white">
                 <i class="text-danger fas fa-trash fa-lg" style="font-size: 1.2rem"></i>
                 </button>
               </div>
@@ -43,7 +43,7 @@
           <div class="card-body">
             <div class="row align-center">
                 <div class="col">
-                    <a href="{% url 'checkout' %}">
+                    <a href="{% url 'payment-confirmation' %}">
                         <button type="button" class="btn btn-primary btn-block btn-lg">
                           Proceed to Pay
                         </button>

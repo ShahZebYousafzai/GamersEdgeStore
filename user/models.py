@@ -34,11 +34,11 @@ class UserPurchaseHistory(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user_profile
+        return self.user_profile.user.username
 
 class UserWishlist(models.Model):
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user_profile
+        return self.user_profile.user.username

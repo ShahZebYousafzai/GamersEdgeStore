@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-heading header-text">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>Confirmation</h3>
+        <span class="breadcrumb"><a href="#">Home</a>  >  Payment Confirmation</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container mt-5 pt-5">
+    <div class="row">
+      <div class="col-8 m-auto">
+        <div class="card">
+          <div class="card-body text-center">
+            <h5>Are you sure you want confirm your order?</h5>
+            <br>
+            <div class="row gap-3">
+              <div class="col">
+                <form method="post">
+                  {% csrf_token %}
+                  <button class="btn btn-primary" type="submit">Confirm</button>
+                </form>
+              </div>
+              <div class="col">
+                <a href="{% url 'cart' %}"><button class="btn btn-danger">Changed my mind</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

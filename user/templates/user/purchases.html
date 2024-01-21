@@ -4,8 +4,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h3>User Profile</h3>
-        <span class="breadcrumb"><a href="#">Home</a> > Profile</span>
+        <h3>Purchases</h3>
+        <span class="breadcrumb"><a href="#">Home</a> > Purchases</span>
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@
         <div class="col-lg-3 col-md-12 mb-3 mb-sm-1">
           <div class="card" style="padding: 14px;">
             <ul class="list-group list-group-flush text-center">
-              <li class="list-group-item"><a href="" style="color: black;">Profile</a></li>
+              <li class="list-group-item"><a href="{% url 'profile' %}" style="color: black;">Profile</a></li>
               <li class="list-group-item active"><a href="{% url 'purchases' %}" style="color: white;">Purchases</a></li>
               <li class="list-group-item"><a href="{% url 'wishlist' %}" style="color: black;">Wishlist</a></li>
               <li class="list-group-item"><a href="" style="color: black;">Transactions</a></li>
@@ -27,29 +27,29 @@
           </div>
         </div>
         <div class="col-lg-9 col-md-12">
-            <div class="card p-4 gap-3">
-                <div class="row">
-                  <div class="col-lg-10 text-right">
-                    <h1>Your Purchases</h1>
+          <div class="card p-4 gap-3">
+            <h1>Your Purchases</h1>
+            {% for game in games %}
+            <div class="card rounded-3 mb-4">
+              <div class="card-body p-4">
+                <div class="row d-flex justify-content-between align-items-center">
+                  <div class="col-md-2 col-lg-2 col-xl-2">
+                    <img
+                      src="{{game.image_url}}"
+                      class="img-fluid rounded-3"
+                    />
                   </div>
-                </div>
-                <div class="row p-3 rounded bg-primary bg-gradient">
-                  <div class="col">
-                    <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
+                  <div class="col-md-3 col-lg-3 col-xl-3">
+                    <p class="lead fw-normal mb-2">{{game.title}}</p>
                   </div>
-                  <div class="col-lg-9">
-                    <h2 style="color: white;">Assassins Creed</h2>
+                  <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 delete-cart">
+                    <h5 class="mb-0">${{game.price}}</h5>
                   </div>
-                </div>
-                <div class="row p-3 rounded bg-primary bg-gradient">
-                    <div class="col">
-                      <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
-                    </div>
-                    <div class="col-lg-9">
-                      <h2 style="color: white;">Assassins Creed</h2>
-                    </div>
                 </div>
               </div>
+            </div>
+            {% endfor %}
+          </div>
         </div>
         </div>
       </div>

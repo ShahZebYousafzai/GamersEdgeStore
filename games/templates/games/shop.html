@@ -47,19 +47,38 @@
       <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 {% for genre in game.genres.all %}{{ genre|slugify }} {% endfor %}">
         <div class="item">
           <div class="thumb">
-            <a href="{% url 'game-details' game.id %}"><img src="{{game.image_url}}" alt=""></a>
-            <span class="price">${{game.price}}</span>
+              <a href="{% url 'game-details' game.id %}">
+                  <img src="{{game.image_url}}" alt="">
+              </a>
+              <span class="price">${{game.price}}</span>
           </div>
           <div class="down-content">
-            {% for genre in game.genres.all %}
-              <span class="category">{{genre.name}}</span>
-            {% endfor %}
-            <h4>{{game.title|slice:"16"}}</h4>
-            <!-- <a></a> -->
-            <!-- <div class="cart-btn"><i class="fa fa-shopping-cart"></i></div> -->
-            <button data-game={{game.id}} data-action="add" class="cart-btn add-btn update-cart"><i class="fa fa-shopping-cart"></i></button>
+              {% for genre in game.genres.all %}
+                  <span class="category">{{genre.name}}</span>
+              {% endfor %}
+              <div class="col-lg-9">
+                <p>{{game.title}}</p>
+              </div>
+              <div class="button-container">
+                <!-- data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" -->
+                  <button data-game="{{game.id}}" class="cart-btn" onclick="toggleCart(this)">
+                    {% if game.id in purshasedItems %}  
+                      <i class="bi bi-cart-dash-fill"></i>
+                    {% else %}
+                      <i class="bi bi-cart-plus"></i>
+                    {% endif %}
+                  </button>
+                  <!-- data-bs-toggle="tooltip" data-bs-placement="top" title="Add to Wishlist" -->
+                  <button data-game="{{ game.id }}" class="wishlist-btn" onclick="toggleWishlist(this)">
+                    {% if game.id in wishlistItems %}
+                      <i class="bi bi-heart-fill"></i>
+                    {% else %}
+                      <i class="bi bi-heart"></i>
+                    {% endif %}
+                </button>
+              </div>
           </div>
-        </div>
+      </div>
       </div>
       {% endfor %}
     </div>
@@ -76,4 +95,55 @@
     </div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+  function toggleWishlist(button) {
+      var icon = button.querySelector('i');
+      var gameId = button.getAttribute('data-game');
+
+      // Toggle the heart icon immediately
+      if (icon.classList.contains('bi-heart')) {
+          icon.classList.remove('bi-heart');
+          icon.classList.add('bi-heart-fill');
+      } else {
+          icon.classList.remove('bi-heart-fill');
+          icon.classList.add('bi-heart');
+      }
+
+      // Send an AJAX request to add or remove the game from the wishlist
+      if (icon.classList.contains('bi-heart-fill')) {
+          addToWishlist(gameId);
+      } else {
+          removeFromWishlist(gameId);
+      }
+  }
+
+  function addToWishlist(gameId) {
+      // Send an AJAX request to add the game to the wishlist
+      $.ajax({
+          type: 'POST',
+          url: '/add_to_wishlist/',
+          data: {
+              'game_id': gameId,
+              'action': 'add',
+              'csrfmiddlewaretoken': '{{ csrf_token }}'
+          },
+      });
+  }
+
+  function removeFromWishlist(gameId) {
+      // Send an AJAX request to remove the game from the wishlist
+      $.ajax({
+          type: 'POST',
+          url: '/remove_from_wishlist/',
+          data: {
+              'game_id': gameId,
+              'action': 'remove',
+              'csrfmiddlewaretoken': '{{ csrf_token }}'
+          },
+      });
+  }
+</script>
 {% endblock content %}

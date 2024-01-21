@@ -18,9 +18,9 @@
         <div class="col-lg-3 col-md-12 mb-3 mb-sm-1">
           <div class="card" style="padding: 14px;">
             <ul class="list-group list-group-flush text-center">
-              <li class="list-group-item"><a href="" style="color: black;">Profile</a></li>
+              <li class="list-group-item active"><a href="{% url 'profile' %}" style="color: white;">Profile</a></li>
               <li class="list-group-item"><a href="{% url 'purchases' %}" style="color: black;">Purchases</a></li>
-              <li class="list-group-item"><a href="" style="color: black;">Wishlist</a></li>
+              <li class="list-group-item"><a href="{% url 'wishlist' %}" style="color: black;">Wishlist</a></li>
               <li class="list-group-item"><a href="" style="color: black;">Transactions</a></li>
               <li class="list-group-item"><a href="" style="color: black;">Update Profile</a></li>
             </ul>            
@@ -77,57 +77,67 @@
       </div>
 
       <div class="card p-4 gap-3">
-        <div class="row">
-          <div class="col-lg-11 text-right">
-            <h1>Your Purchases</h1>
+        <h1>Your Purchases</h1>
+        {% if p_games %}
+          {% for game in p_games %}
+          <div class="card rounded-3 mb-4">
+            <div class="card-body p-4">
+              <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-md-2 col-lg-2 col-xl-2">
+                  <img
+                    src="{{game.image_url}}"
+                    class="img-fluid rounded-3"
+                  />
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                  <p class="lead fw-normal mb-2">{{game.title}}</p>
+                </div>
+                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 delete-cart">
+                  <h5 class="mb-0">${{game.price}}</h5>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col text-right">
-            <a href=""><h6>View All</h6></a>
-          </div>
+          {% endfor %}
+        {% else %}
+        <br>
+        <div class="text-center" style="padding-bottom: 30px;">
+          <h5>You have no purchases</h5>
         </div>
-        <div class="row p-3 rounded bg-primary bg-gradient">
-          <div class="col">
-            <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
-          </div>
-          <div class="col-lg-10">
-            <h2 style="color: white;">Assassins Creed</h2>
-          </div>
-        </div>
-        <div class="row p-3 rounded bg-primary bg-gradient">
-          <div class="col">
-            <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
-          </div>
-          <div class="col-lg-10">
-            <h2 style="color: white;">Assassins Creed</h2>
-          </div>
-        </div>
+        {% endif %}
       </div>
+
       <br>
+
       <div class="card p-4 gap-3">
-        <div class="row">
-          <div class="col-lg-11 text-right">
-            <h1>Your Wishlist</h1>
+        <h1>Your Wishlist</h1>
+        {% if w_games %}
+          {% for game in w_games %}
+          <div class="card rounded-3 mb-4">
+            <div class="card-body p-4">
+              <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-md-2 col-lg-2 col-xl-2">
+                  <img
+                    src="{{game.image_url}}"
+                    class="img-fluid rounded-3"
+                  />
+                </div>
+                <div class="col-md-3 col-lg-3 col-xl-3">
+                  <p class="lead fw-normal mb-2">{{game.title}}</p>
+                </div>
+                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 delete-cart">
+                  <h5 class="mb-0">${{game.price}}</h5>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col text-right">
-            <a href=""><h6>View All</h6></a>
-          </div>
+          {% endfor %}
+        {% else %}
+        <br>
+        <div class="text-center" style="padding-bottom: 30px;">
+          <h5>You have no wishlists</h5>
         </div>
-        <div class="row p-3 rounded bg-primary bg-gradient">
-          <div class="col">
-            <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
-          </div>
-          <div class="col-lg-10">
-            <h2 style="color: white;">Assassins Creed</h2>
-          </div>
-        </div>
-        <div class="row p-3 rounded bg-primary bg-gradient">
-          <div class="col">
-            <img class="rounded img-thumbnail" style="width: 200px; height: 200px;"></img>
-          </div>
-          <div class="col-lg-10">
-            <h2 style="color: white;">Assassins Creed</h2>
-          </div>
-        </div>
+        {% endif %}
       </div>
     </div>
   </div>
